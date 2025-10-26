@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Install TrueSpend Extension</title>
+  <meta name="description" content="Install the TrueSpend browser extension for smart rewards and verified coupons.">
+  <style>
+    body{font-family:-apple-system,system-ui,Segoe UI,Roboto,sans-serif;background:#F8FAFC;margin:0;padding:0}
+    .wrap{max-width:720px;margin:0 auto;padding:40px 20px;text-align:center}
+    h1{margin:0 0 10px;color:#111827}
+    p{color:#374151;line-height:1.5}
+    a.btn{display:inline-block;background:#2563EB;color:#fff;text-decoration:none;padding:12px 16px;border-radius:10px;font-weight:700}
+    small{color:#6b7280;display:block;margin-top:8px}
+    .links{margin-top:24px}
+    .links a{display:inline-block;margin:6px 8px;color:#2563EB}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Get the TrueSpend Extension</h1>
+    <p>We’ll detect your browser and send you to the right store page.</p>
+    <div id="ts-install" style="margin:20px 0;"></div>
+    <div class="links">
+      <a href="https://chrome.google.com/webstore/detail/XXXX">Chrome Web Store</a>
+      <a href="https://microsoftedge.microsoft.com/addons/detail/XXXX">Edge Add-ons</a>
+      <a href="https://addons.mozilla.org/firefox/addon/XXXX/">Firefox Add-ons</a>
+      <a href="https://apps.apple.com/app/idXXXXXXXXX">Safari (App Store)</a>
+    </div>
+    <small>Browsers require confirmation in the store. Auto-install isn’t allowed for security.</small>
+  </div>
+  <script>
+  (function () {
+    // TODO: put your real store links here
+    const LINKS = {
+      chrome:  "https://chrome.google.com/webstore/detail/XXXX",
+      edge:    "https://microsoftedge.microsoft.com/addons/detail/XXXX",
+      firefox: "https://addons.mozilla.org/firefox/addon/XXXX/",
+      safari:  "https://apps.apple.com/app/idXXXXXXXXX"
+    };
+    const ua = navigator.userAgent;
+    const isEdge    = /\sEdg\//.test(ua);
+    const isChrome  = !isEdge && /\sChrome\//.test(ua);
+    const isFirefox = /\sFirefox\//.test(ua);
+    const isSafari  = !isChrome && !isEdge && /Safari\//.test(ua);
+    let target = { name:"Chrome Web Store", url:LINKS.chrome };
+    if (isEdge) target = { name:"Edge Add-ons", url:LINKS.edge };
+    else if (isFirefox) target = { name:"Firefox Add-ons", url:LINKS.firefox };
+    else if (isSafari) target = { name:"App Store", url:LINKS.safari };
+    document.getElementById("ts-install").innerHTML =
+      '<a class="btn" href="'+target.url+'" target="_blank" rel="noopener">Install on '+target.name+'</a>';
+  })();
+  </script>
+</body>
+</html>
